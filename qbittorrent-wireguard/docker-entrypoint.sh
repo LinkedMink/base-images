@@ -26,10 +26,7 @@ done
 
 echo "currentIp: ${currentIp}"
 
-# touch /tmp/torrent/qbittorrent.log
-# ln -sf /dev/stdout /tmp/torrent/qbittorrent.log
-# chown -R torrent:torrent /var/log/torrent
-# tail -f /tmp/torrent/qbittorrent.log > /dev/stdout &
-# tail -F /tmp/torrent/qbittorrent.log > /dev/stdout 2>&1 &
+touch /var/log/torrent/qbittorrent.log
+chown -R torrent:torrent /var/log/torrent
 
 exec su -c "tail -F /var/log/torrent/qbittorrent.log & qbittorrent-nox --confirm-legal-notice" -- torrent

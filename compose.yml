@@ -45,7 +45,7 @@ services:
         target: /var/log/torrent
         tmpfs:
           size: 1M
-          mode: 0666
+          mode: 0o01777
       - type: bind
         source: ./qbittorrent-wireguard/downloads
         target: /downloads
