@@ -5,7 +5,7 @@ LABEL net.linkedmink.author="Harlan Sang" \
 
 RUN --mount=type=cache,target=/var/cache/apk/,sharing=locked \
     apk add --update-cache \
-        qbittorrent-nox wireguard-tools iptables sudo curl
+        qbittorrent-nox wireguard-tools iptables sudo curl python3
 
 COPY ./docker-entrypoint.sh ./wg-post-up.sh ./wg-pre-down.sh /usr/local/bin/
 
