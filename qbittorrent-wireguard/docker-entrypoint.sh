@@ -16,6 +16,7 @@ while [ "$currentIp" = "$ORIGINAL_IP" ]
 do
   if [ "$retries" -gt "$IP_CHANGE_RETRY_LIMIT" ]; then
     echo "Retry limit exceeded: ${IP_CHANGE_RETRY_LIMIT}"
+    exit 1
   fi
   sleep 1
 
