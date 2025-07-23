@@ -4,7 +4,7 @@ IP_CHANGE_RETRY_LIMIT="${IP_CHANGE_RETRY_LIMIT:-5}"
 
 set -e
 
-ORIGINAL_IP=$(curl "https://ipinfo.io/ip")
+ORIGINAL_IP=$(curl --no-progress-meter "https://ipinfo.io/ip")
 export ORIGINAL_IP
 echo "ORIGINAL_IP: ${ORIGINAL_IP}"
 
@@ -19,11 +19,17 @@ do
   fi
   sleep 1
 
-  currentIp=$(curl "https://ipinfo.io/ip")
+  currentIp=$(curl --no-progress-meter "https://ipinfo.io/ip")
 
   retries=$((retries+1))
 done
 
 echo "currentIp: ${currentIp}"
 
-exec su -c "qbittorrent-nox --confirm-legal-notice" -- torrent
+# touch /tmp/torrent/qbittorrent.log
+# ln -sf /dev/stdout /tmp/torrent/qbittorrent.log
+# chown -R torrent:torrent /var/log/torrent
+# tail -f /tmp/torrent/qbittorrent.log > /dev/stdout &
+# tail -F /tmp/torrent/qbittorrent.log > /dev/stdout 2>&1 &
+
+exec su -c "tail -F /var/log/torrent/qbittorrent.log & qbittorrent-nox --confirm-legal-notice" -- torrent

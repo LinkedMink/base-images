@@ -41,6 +41,11 @@ services:
       - type: volume
         source: qbittorrent-home
         target: /home/torrent
+      - type: tmpfs
+        target: /var/log/torrent
+        tmpfs:
+          size: 1M
+          mode: 0666
       - type: bind
         source: ./qbittorrent-wireguard/downloads
         target: /downloads
