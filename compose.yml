@@ -1,6 +1,6 @@
 secrets:
   wireguard-config:
-    file: ./qbittorrent-wireguard/wg0.conf
+    file: ./wg0.conf
 
 volumes:
   qbittorrent-home:
@@ -49,6 +49,25 @@ services:
       - type: bind
         source: ./qbittorrent-wireguard/downloads
         target: /downloads
+    secrets:
+      - source: wireguard-config
+        target: wg0.conf
+  wireguard:
+    image: ${DOCKER_REGISTRY:-docker.io}/linkedmink/wireguard
+    command: /bin/sh
+    build:
+      context: ./wireguard
+      platforms:
+        - "linux/amd64"
+        - "linux/arm64"
+    ports:
+      - "51820:51820/udp"
+    cap_add:
+      - NET_ADMIN
+    environment:
+      INTERNAL_CIDRS: "172.16.0.0/12 192.168.0.0/16"
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
     secrets:
       - source: wireguard-config
         target: wg0.conf
