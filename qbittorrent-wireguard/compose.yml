@@ -1,0 +1,39 @@
+volumes:
+  qbittorrent-home:
+
+services:
+  qbittorrent-wireguard:
+    image: ${DOCKER_REGISTRY:-docker.io}/linkedmink/qbittorrent-wireguard
+    build:
+      context: ./
+      labels:
+        net.linkedmink.author: "${DOCKER_IMAGE_AUTHOR}"
+        net.linkedmink.repository: "https://github.com/LinkedMink/base-images/qbittorrent-wireguard"
+      platforms:
+        - "linux/amd64"
+        - "linux/arm64"
+    ports:
+      - "8080:8080/tcp"
+      - "51820:51820/udp"
+    cap_add:
+      - NET_ADMIN
+    environment:
+      INTERNAL_CIDRS: "172.16.0.0/12 192.168.0.0/16"
+      WIREGUARD_CONFIG_PATH: /run/secrets/wg0.conf
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    volumes:
+      - type: volume
+        source: qbittorrent-home
+        target: /home/torrent
+      - type: tmpfs
+        target: /var/log/torrent
+        tmpfs:
+          size: 1M
+          mode: 0o01777
+      - type: bind
+        source: ./downloads
+        target: /downloads
+    secrets:
+      - source: wireguard-config
+        target: wg0.conf

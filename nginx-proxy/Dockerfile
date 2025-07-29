@@ -9,7 +9,7 @@ RUN --mount=type=cache,target=/var/cache/apk/,sharing=locked \
 
 WORKDIR /usr/share/nginx/html
 
-COPY ./default.conf /etc/nginx/http.d/default.conf
+COPY ./dh2048.pem ./nginx.conf ./location-*.conf /etc/nginx/
 
 EXPOSE 80/tcp 443/tcp
 HEALTHCHECK --interval=1m --timeout=3s --retries=2 \

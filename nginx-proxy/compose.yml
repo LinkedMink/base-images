@@ -1,0 +1,35 @@
+configs:
+  example-domain-local-crt:
+    file: ./example-domain.local.crt
+
+secrets:
+  example-domain-local-key:
+    file: ./example-domain.local.key
+
+services:
+  nginx-proxy:
+    image: ${DOCKER_REGISTRY:-docker.io}/linkedmink/nginx-proxy
+    build:
+      context: ./
+      labels:
+        net.linkedmink.author: "${DOCKER_IMAGE_AUTHOR}"
+        net.linkedmink.repository: "https://github.com/LinkedMink/base-images/nginx-proxy"
+      platforms:
+        - "linux/amd64"
+        - "linux/arm64"
+    ports:
+      - "80:80/tcp"
+      - "443:443/tcp"
+    configs:
+      - source: example-domain-local-crt
+        target: /etc/ssl/certs/example-domain.local.crt
+    secrets:
+      - source: example-domain-local-key
+        target: example-domain.local.key
+    volumes:
+      - type: bind
+        source: ./example-domain.local
+        target: /srv/example-domain.local
+      - type: bind
+        source: ./http.d
+        target: /etc/nginx/http.d

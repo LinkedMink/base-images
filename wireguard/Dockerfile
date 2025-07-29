@@ -1,8 +1,5 @@
 FROM docker.io/alpine:3 AS application
 
-LABEL net.linkedmink.author="Harlan Sang" \
-    net.linkedmink.repository="https://github.com/LinkedMink/base-images/wireguard"
-
 RUN --mount=type=cache,target=/var/cache/apk/,sharing=locked \
     apk add --update-cache \
         wireguard-tools iptables sudo curl
