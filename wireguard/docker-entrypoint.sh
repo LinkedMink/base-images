@@ -10,6 +10,9 @@ export ORIGINAL_IP
 echo "ORIGINAL_IP=\"${ORIGINAL_IP}\"" >> /etc/environment
 echo "ORIGINAL_IP: ${ORIGINAL_IP}"
 
+resolvconf -u
+cat /etc/resolv.conf.bak >> /etc/resolv.conf
+
 wg-quick up "$WIREGUARD_CONFIG_PATH"
 
 retries=0

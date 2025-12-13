@@ -9,7 +9,7 @@ COPY ./docker-entrypoint.sh ./wg-post-up.sh ./wg-pre-down.sh /usr/local/bin/
 RUN sed -i 's|\[\[ $proto == -4 \]\] && cmd sysctl -q net\.ipv4\.conf\.all\.src_valid_mark=1|[[ $proto == -4 ]] \&\& [[ $(sysctl -n net.ipv4.conf.all.src_valid_mark) != 1 ]] \&\& cmd sysctl -q net.ipv4.conf.all.src_valid_mark=1|' /usr/bin/wg-quick
 
 EXPOSE 51820/udp
-HEALTHCHECK --interval=1m --timeout=30s --retries=2 \
+HEALTHCHECK --interval=1m --timeout=30s --retries=2 --start-period=45s --start-interval=5s \
     CMD echo "$ORIGINAL_IP" && \
         [ $(curl --no-progress-meter "https://ipinfo.io/ip") != "$ORIGINAL_IP" ]
 

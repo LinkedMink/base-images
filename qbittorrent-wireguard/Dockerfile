@@ -16,7 +16,7 @@ VOLUME [ "/home/torrent", "/var/log/torrent" ]
 WORKDIR /downloads
 
 EXPOSE 8080/tcp
-HEALTHCHECK --interval=1m --timeout=3s --retries=2 \
-    CMD netstat -an | grep 8080
+HEALTHCHECK --interval=1m --timeout=3s --retries=2 --start-period=45s --start-interval=3s \
+    CMD netstat -t -l -n | grep 8080
 
 CMD  ["qbittorrent-init.sh"]

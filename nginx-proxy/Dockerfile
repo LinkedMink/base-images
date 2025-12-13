@@ -12,7 +12,7 @@ WORKDIR /usr/share/nginx/html
 COPY ./dh2048.pem ./nginx.conf ./location-*.conf /etc/nginx/
 
 EXPOSE 80/tcp 443/tcp
-HEALTHCHECK --interval=1m --timeout=3s --retries=2 \
-    CMD netstat -an | grep 443
+HEALTHCHECK --interval=1m --timeout=3s --retries=2 --start-period=45s --start-interval=3s \
+    CMD netstat -t -l -n | grep 443
 
 CMD ["nginx", "-g", "daemon off;"]
