@@ -9,7 +9,8 @@ RUN --mount=type=cache,target=/var/cache/apk/,sharing=locked \
 
 WORKDIR /usr/share/nginx/html
 
-COPY ./dh2048.pem ./nginx.conf ./location-*.conf /etc/nginx/
+# COPY ./dh2048.pem ./nginx.conf ./location-*.conf /etc/nginx/
+COPY ./nginx.conf ./location-*.conf /etc/nginx/
 
 EXPOSE 80/tcp 443/tcp
 HEALTHCHECK --interval=1m --timeout=3s --retries=2 --start-period=45s --start-interval=3s \
