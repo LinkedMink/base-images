@@ -20,6 +20,7 @@ services:
     ports:
       - "80:80/tcp"
       - "443:443/tcp"
+      - "443:443/udp"
     configs:
       - source: example-domain-local-crt
         target: /etc/ssl/certs/example-domain.local.crt
