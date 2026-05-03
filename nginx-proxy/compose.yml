@@ -21,6 +21,10 @@ services:
       - "80:80/tcp"
       - "443:443/tcp"
       - "443:443/udp"
+    cap_add:
+      - NET_ADMIN
+      - BPF
+      - PERFMON
     configs:
       - source: example-domain-local-crt
         target: /etc/ssl/certs/example-domain.local.crt
