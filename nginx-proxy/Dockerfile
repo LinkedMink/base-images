@@ -1,4 +1,6 @@
-FROM docker.io/alpine:3 AS application
+ARG ALPINE_VERSION
+
+FROM docker.io/alpine:${ALPINE_VERSION} AS application
 
 LABEL net.linkedmink.author="Harlan Sang" \
     net.linkedmink.repository="https://github.com/LinkedMink/base-images"

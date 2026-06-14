@@ -1,4 +1,6 @@
-FROM docker.io/linkedmink/wireguard AS application
+ARG ALPINE_VERSION WIREGUARD_VERSION
+
+FROM docker.io/linkedmink/wireguard:${WIREGUARD_VERSION}-alpine${ALPINE_VERSION} AS application
 
 RUN --mount=type=cache,target=/var/cache/apk/,sharing=locked \
     apk add --update-cache \

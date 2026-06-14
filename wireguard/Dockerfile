@@ -1,4 +1,6 @@
-FROM docker.io/alpine:3 AS application
+ARG ALPINE_VERSION
+
+FROM docker.io/alpine:${ALPINE_VERSION} AS application
 
 RUN --mount=type=cache,target=/var/cache/apk/,sharing=locked \
     apk add --update-cache \

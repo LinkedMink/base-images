@@ -4,9 +4,24 @@ services:
     command: /bin/sh
     build:
       context: ./
+      args:
+        ALPINE_VERSION: ${ALPINE_VERSION}
       labels:
-        net.linkedmink.author: "${DOCKER_IMAGE_AUTHOR}"
+        net.linkedmink.author: "Harlan Sang"
         net.linkedmink.repository: "https://github.com/LinkedMink/base-images/wireguard"
+      tags:
+        - "${DOCKER_REGISTRY:-docker.io}/linkedmink/wireguard:${WIREGUARD_MAJOR_VERSION}-alpine"
+        - "${DOCKER_REGISTRY:-docker.io}/linkedmink/wireguard:${WIREGUARD_MAJOR_VERSION}-alpine${ALPINE_MAJOR_VERSION}"
+        - "${DOCKER_REGISTRY:-docker.io}/linkedmink/wireguard:${WIREGUARD_MAJOR_VERSION}-alpine${ALPINE_VERSION}"
+        - "${DOCKER_REGISTRY:-docker.io}/linkedmink/wireguard:${WIREGUARD_MINOR_VERSION}-alpine"
+        - "${DOCKER_REGISTRY:-docker.io}/linkedmink/wireguard:${WIREGUARD_MINOR_VERSION}-alpine${ALPINE_MAJOR_VERSION}"
+        - "${DOCKER_REGISTRY:-docker.io}/linkedmink/wireguard:${WIREGUARD_MINOR_VERSION}-alpine${ALPINE_VERSION}"
+        - "${DOCKER_REGISTRY:-docker.io}/linkedmink/wireguard:${WIREGUARD_VERSION}-alpine"
+        - "${DOCKER_REGISTRY:-docker.io}/linkedmink/wireguard:${WIREGUARD_VERSION}-alpine${ALPINE_MAJOR_VERSION}"
+        - "${DOCKER_REGISTRY:-docker.io}/linkedmink/wireguard:${WIREGUARD_VERSION}-alpine${ALPINE_VERSION}"
+        - "${DOCKER_REGISTRY:-docker.io}/linkedmink/wireguard:${WIREGUARD_MAJOR_VERSION}"
+        - "${DOCKER_REGISTRY:-docker.io}/linkedmink/wireguard:${WIREGUARD_MINOR_VERSION}"
+        - "${DOCKER_REGISTRY:-docker.io}/linkedmink/wireguard:${WIREGUARD_VERSION}"
       platforms:
         - "linux/amd64"
         - "linux/arm64"
