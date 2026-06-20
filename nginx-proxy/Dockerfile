@@ -1,4 +1,4 @@
-ARG ALPINE_VERSION
+ARG ALPINE_VERSION=latest
 
 FROM docker.io/alpine:${ALPINE_VERSION} AS application
 

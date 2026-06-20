@@ -7,8 +7,7 @@ services:
     build:
       context: ./
       args:
-        ALPINE_VERSION: ${ALPINE_VERSION}
-        WIREGUARD_VERSION: ${WIREGUARD_VERSION}
+        WIREGUARD_VERSION: "${WIREGUARD_VERSION}-alpine${ALPINE_VERSION}"
       labels:
         net.linkedmink.author: "Harlan Sang"
         net.linkedmink.repository: "https://github.com/LinkedMink/base-images/qbittorrent-wireguard"
