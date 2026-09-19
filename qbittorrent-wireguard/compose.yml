@@ -3,7 +3,7 @@ volumes:
 
 services:
   qbittorrent-wireguard:
-    image: ${DOCKER_REGISTRY:-docker.io}/linkedmink/qbittorrent-wireguard
+    image: linkedmink/qbittorrent-wireguard
     build:
       context: ./
       args:
@@ -37,6 +37,8 @@ services:
       WIREGUARD_CONFIG_PATH: /run/secrets/wg0.conf
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
+    # Search can produce zombie processes
+    init: true
     volumes:
       - type: volume
         source: qbittorrent-home

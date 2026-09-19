@@ -1,6 +1,6 @@
 services:
   wireguard:
-    image: ${DOCKER_REGISTRY:-docker.io}/linkedmink/wireguard
+    image: linkedmink/wireguard
     command: /bin/sh
     build:
       context: ./

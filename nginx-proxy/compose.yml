@@ -8,7 +8,7 @@ secrets:
 
 services:
   nginx-proxy:
-    image: ${DOCKER_REGISTRY:-docker.io}/linkedmink/nginx-proxy
+    image: linkedmink/nginx-proxy
     build:
       context: ./
       args:

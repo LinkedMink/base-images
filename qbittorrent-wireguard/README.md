@@ -34,7 +34,7 @@ volumes:
 
 services:
   torrent:
-    image: ${DOCKER_REGISTRY:-docker.io}/linkedmink/qbittorrent-wireguard
+    image: linkedmink/qbittorrent-wireguard
     restart: unless-stopped
     ports:
       # You could use a reverse proxy to access the instance.
